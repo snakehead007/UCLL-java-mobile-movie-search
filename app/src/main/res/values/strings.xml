@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">UCLL Movie Search</string>
+    <string name="search">Search</string>
+    <string name="searchHint">Type movie name here</string>
+    <string name="lblYear">Year:&#160;</string>
+    <string name="imgFavorite">Favorite</string>
+    <string name="msgMoviesfoundPrefix">Displaying the first\u0020</string>
+    <string name="msgMoviesfoundSuffix">&#160;titles from a total list of&#160;</string>
+    <string name="msgNoMoviesfound">No movies found for the search term:\u0020</string>
+</resources>
