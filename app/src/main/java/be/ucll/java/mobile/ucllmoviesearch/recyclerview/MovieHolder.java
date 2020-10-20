@@ -23,10 +23,10 @@ public class MovieHolder extends RecyclerView.ViewHolder implements View.OnClick
 
     private Movie movie;
 
-    private final MovieClick clickHandler;
+    private final ClickHandler clickHandler;
 
     // Constructor
-    public MovieHolder(View itemView, MovieClick ch) {
+    public MovieHolder(View itemView, ClickHandler ch) {
         super(itemView);
 
         this.clickHandler = ch;

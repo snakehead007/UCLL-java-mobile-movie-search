@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class OMDBResponse {
+public class MovieSearch {
 
     @SerializedName("Search")
     @Expose

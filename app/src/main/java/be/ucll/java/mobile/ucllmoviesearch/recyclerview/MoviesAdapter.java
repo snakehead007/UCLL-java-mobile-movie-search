@@ -16,10 +16,10 @@ import be.ucll.java.mobile.ucllmoviesearch.model.internal.Movie;
 public class MoviesAdapter extends RecyclerView.Adapter<MovieHolder> {
     private static final String TAG = "MoviesAdapter";
 
-    private MovieClick clickHandler;
+    private ClickHandler clickHandler;
     private List<Movie> list;
 
-    public MoviesAdapter(MovieClick clickHandler, List<Movie> list) {
+    public MoviesAdapter(ClickHandler clickHandler, List<Movie> list) {
         this.clickHandler = clickHandler;
         this.list = list;
     }

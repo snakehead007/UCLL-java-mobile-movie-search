@@ -29,12 +29,12 @@ import java.util.Collections;
 import java.util.List;
 
 import be.ucll.java.mobile.ucllmoviesearch.model.internal.Movie;
-import be.ucll.java.mobile.ucllmoviesearch.model.webservice.OMDBResponse;
+import be.ucll.java.mobile.ucllmoviesearch.model.webservice.MovieSearch;
 import be.ucll.java.mobile.ucllmoviesearch.model.webservice.Search;
-import be.ucll.java.mobile.ucllmoviesearch.recyclerview.MovieClick;
+import be.ucll.java.mobile.ucllmoviesearch.recyclerview.ClickHandler;
 import be.ucll.java.mobile.ucllmoviesearch.recyclerview.MoviesAdapter;
 
-public class MainActivity extends AppCompatActivity implements Response.Listener, Response.ErrorListener, MovieClick {
+public class MainActivity extends AppCompatActivity implements Response.Listener, Response.ErrorListener, ClickHandler {
     private static final String TAG = "MainActivity";
     private static final String OMDB_API_URL = "http://www.omdbapi.com/?apikey=ba57c0a5&type=movie&s=";
     private static final String IMDB_WEBSITE_URL = "https://m.imdb.com/title/";
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     private RecyclerView rvMovies;
     private MoviesAdapter adapter;
     private List<Movie> movies;
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void handleBtnSearchClick(View view) {
+    public void onBtnSearchClick(View view) {
         // Instantiate the RequestQueue for asynchronous operations
-        RequestQueue queue = Volley.newRequestQueue(this);
+        queue = Volley.newRequestQueue(this);
 
         // Encode as UTF8 characters f.i. replace a space by a + sign
         String searchterm = txtSearch.getText().toString();
@@ -65,8 +66,11 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         } catch (UnsupportedEncodingException ignore) {
         }
 
+        String url = OMDB_API_URL + searchterm;
+        Log.d(TAG, "URL: " + url);
+
         // Prepare the request to be send out towards the REST service OMDB_API_URL..
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, OMDB_API_URL + searchterm, null, this, this);
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
         // Add the request to the RequestQueue for asynchronous retrieval on separate thread.
         queue.add(req);
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         Log.d(TAG, jsono.toString());
 
         // Convert REST String to Pojo's using GSON libraries
-        OMDBResponse omdbrespo = new Gson().fromJson(jsono.toString(), OMDBResponse.class);
+        MovieSearch omdbrespo = new Gson().fromJson(jsono.toString(), MovieSearch.class);
         if (omdbrespo != null && omdbrespo.getSearch() != null && omdbrespo.getSearch().size() > 0) {
             movies = new ArrayList<>(omdbrespo.getSearch().size());
             try {
