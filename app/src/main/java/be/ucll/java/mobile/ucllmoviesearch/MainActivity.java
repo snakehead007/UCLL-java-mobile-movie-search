@@ -36,7 +36,7 @@ import be.ucll.java.mobile.ucllmoviesearch.recyclerview.MoviesAdapter;
 
 public class MainActivity extends AppCompatActivity implements Response.Listener, Response.ErrorListener, ClickHandler {
     private static final String TAG = "MainActivity";
-    private static final String OMDB_API_URL = "http://www.omdbapi.com/?apikey=ba57c0a5&type=movie&s=";
+    private static final String OMDB_API_URL = "https://www.omdbapi.com/?apikey=ba57c0a5&type=movie&s=";
     private static final String IMDB_WEBSITE_URL = "https://m.imdb.com/title/";
 
     private TextView txtSearch;
